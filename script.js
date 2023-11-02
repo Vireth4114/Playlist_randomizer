@@ -1,6 +1,7 @@
 const key = 'AIzaSyAaugZrD0vq4UhzSxo3nV7NNuOjMsHcEIw';
-
+let help = document.getElementsByClassName("iframe")[0];
 let list = new Array;
+var player;
 
 function getData(pageToken) {
     let playlist = inputting.value;
@@ -26,7 +27,22 @@ function getData(pageToken) {
 
 function display() {
     let element = list[Math.floor(Math.random() * list.length)];
-    document.getElementById("main").innerHTML += `<iframe height="450" width="800"src="https://www.youtube.com/embed/${element}?autoplay=1&mute=1" allow='autoplay'></iframe>`
+    document.getElementById("video").innerHTML = `<iframe id="thevideo" height="450" width="800"src="https://www.youtube.com/embed/${element}?autoplay=1&enablejsapi=1" allow='autoplay'></iframe>`
+    player = new YT.Player('thevideo', {
+        events: { 'onStateChange': onPlayerStateChange }
+    });
 }
 
-getData("");
+function doThings() {
+    if (list.length == 0) {
+        getData("");
+    } else {
+        display();
+    }
+}
+
+function onPlayerStateChange(event) {
+    if (event.data == 0) {
+        doThings();
+    }
+}
