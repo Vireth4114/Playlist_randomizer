@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #181818;
+    color: white;
+}
+
+input, button {
+    background-color: inherit;
+    border: solid 1px white;
+    height: 5vh;
+    color: inherit;
+}
