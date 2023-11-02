@@ -4,7 +4,8 @@ let list = new Array;
 var player;
 
 function getData(pageToken) {
-    let playlist = inputting.value;
+    document.getElementById("video").innerHTML = "Loading...";
+    let playlist = inputting.value.split("/").pop();
     let req = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&key=${key}&playlistId=${playlist}&maxResults=50&pageToken=${pageToken}`
     fetch(req)
         .then(response => {
@@ -20,6 +21,7 @@ function getData(pageToken) {
             if (data["nextPageToken"] != null) {
                 getData(data["nextPageToken"]);
             } else {
+                document.getElementById("header").innerHTML = "<button onclick=doThings('')>Next</button>"
                 display();
             }
         })
@@ -27,7 +29,7 @@ function getData(pageToken) {
 
 function display() {
     let element = list[Math.floor(Math.random() * list.length)];
-    document.getElementById("video").innerHTML = `<iframe id="thevideo" height="450" width="800"src="https://www.youtube.com/embed/${element}?autoplay=1&enablejsapi=1" allow='autoplay'></iframe>`
+    document.getElementById("video").innerHTML = `<iframe id="thevideo" src="https://www.youtube.com/embed/${element}?autoplay=1&enablejsapi=1&rel=0" allow='autoplay' allowfullscreen></iframe>`
     player = new YT.Player('thevideo', {
         events: { 'onStateChange': onPlayerStateChange }
     });
