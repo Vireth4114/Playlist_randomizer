@@ -28,7 +28,9 @@ function getData(pageToken) {
 }
 
 function display() {
-    let element = list[Math.floor(Math.random() * list.length)];
+    let n = Math.floor(Math.random() * list.length);
+    let element = list[n];
+    list.splice(n, 1);
     document.getElementById("video").innerHTML = `<iframe id="thevideo" src="https://www.youtube.com/embed/${element}?autoplay=1&enablejsapi=1&rel=0" allow='autoplay' allowfullscreen></iframe>`
     player = new YT.Player('thevideo', {
         events: { 'onStateChange': onPlayerStateChange }
