@@ -5,6 +5,7 @@ const cors = require('cors');
 const axios = require('axios');
 
 const app = express();
+const PORT = 3000;
 
 app.use(cors()); // Allow frontend to call backend
 
@@ -28,5 +29,5 @@ app.get('/api/data', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running at http://${process.env.HOST}:${process.env.PORT}`);
+  console.log(`Server running at http://${HOST}:${PORT}`);
 });
