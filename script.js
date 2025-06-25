@@ -4,7 +4,8 @@ var player;
 
 function getData(pageToken) {
     document.getElementById("video").innerHTML = "Loading...";
-    let playlist = inputting.value.split("=").pop();
+    let params = new URLSearchParams(inputting.value);
+    let playlist = params.get("list");
     fetch(`${API_URL}?playlist=${playlist}&pageToken=${pageToken}`)
         .then(response => {
             if (!response.ok) {
