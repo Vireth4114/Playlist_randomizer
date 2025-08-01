@@ -4,8 +4,13 @@ var player;
 
 function getData(pageToken) {
     document.getElementById("video").innerHTML = "Loading...";
-    let params = new URLSearchParams(inputting.value);
-    let playlist = params.get("list");
+    let playlist = "";
+    try {
+        const params = new URLSearchParams(new URL(inputting.value).search);
+        playlist = params.get("list");
+    } catch (error) {
+        playlist = inputting.value;
+    }
     fetch(`${API_URL}?playlist=${playlist}&pageToken=${pageToken}`)
         .then(response => {
             if (!response.ok) {
